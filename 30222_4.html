@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ชุดกิจกรรมการอ่านเชิงรุกและแบบทดสอบการอ่านเชิงวิจารณ์ (อ30222) ม.4</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        },
+                        tu: {
+                            gold: '#d97706',
+                            red: '#991b1b',
+                            blue: '#1e3a8a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Prompt', 'Sarabun', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Prompt', 'Sarabun', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .gradient-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #4f46e5 100%);
+        }
+        .glossary-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .glossary-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 8px;
+        }
+        .glossary-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 8px;
+        }
+        .glossary-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col">
+
+    <header class="gradient-header text-white shadow-lg sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-white/10 p-2.5 rounded-xl backdrop-blur-md border border-white/20">
+                        <i class="fa-solid font-bold fa-book-open-reader text-2xl text-amber-300"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-amber-300 tracking-wider uppercase">โรงเรียนเตรียมอุดมศึกษานครราชสีมา</div>
+                        <h1 class="text-xl sm:text-2xl font-bold tracking-tight">ชุดกิจกรรมการอ่านเชิงรุกร่วมกับสื่อดิจิทัล</h1>
+                        <p class="text-xs text-slate-200">รายวิชาการอ่านเชิงวิจารณ์ (อ30222) ชั้นมัธยมศึกษาปีที่ 4 | ครูภิญญาพัชญ์ คบด่านกลาง (Active Learning Specialist)</p>
+                    </div>
+                </div>
+                
+                <nav class="flex items-center space-x-2 bg-white/10 p-1.5 rounded-xl backdrop-blur-md self-start md:self-auto border border-white/10 text-sm">
+                    <button onclick="switchTab('materials')" id="tab-btn-materials" class="nav-tab px-3.5 py-1.5 rounded-lg font-medium transition-all duration-200 bg-white text-brand-700 shadow-sm">
+                        <i class="fa-solid fa-book-bookmark mr-1.5"></i>สื่อการอ่าน (4 เรื่อง)
+                    </button>
+                    <button onclick="switchTab('strategies')" id="tab-btn-strategies" class="nav-tab px-3.5 py-1.5 rounded-lg font-medium text-white hover:bg-white/10 transition-all duration-200">
+                        <i class="fa-solid fa-lightbulb mr-1.5"></i>4 กลยุทธ์การอ่าน
+                    </button>
+                    <button onclick="switchTab('quiz')" id="tab-btn-quiz" class="nav-tab px-3.5 py-1.5 rounded-lg font-medium text-white hover:bg-white/10 transition-all duration-200">
+                        <i class="fa-solid fa-pen-to-square mr-1.5"></i>ทำแบบทดสอบ (30 ข้อ)
+                    </button>
+                    <button onclick="openTeacherAuthModal()" class="px-3 py-1.5 rounded-lg font-medium bg-amber-400 hover:bg-amber-300 text-slate-900 transition-all duration-200 shadow-sm ml-2">
+                        <i class="fa-solid fa-user-tie mr-1.5"></i>สำหรับครู
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <section id="section-materials" class="tab-content space-y-6">
+            <!-- Unit Selector Buttons -->
+            <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap gap-2">
+                <button onclick="selectUnit(1)" id="unit-tab-1" class="unit-tab flex-1 min-w-[200px] py-2.5 px-4 rounded-xl font-medium text-sm transition-all duration-200 bg-indigo-600 text-white shadow-md">
+                    <i class="fa-solid fa-robot mr-2"></i>Unit 1: Generative AI
+                </button>
+                <button onclick="selectUnit(2)" id="unit-tab-2" class="unit-tab flex-1 min-w-[200px] py-2.5 px-4 rounded-xl font-medium text-sm transition-all duration-200 bg-slate-100 text-slate-600 hover:bg-slate-200">
+                    <i class="fa-solid fa-shirt mr-2"></i>Unit 2: Fast Fashion
+                </button>
+                <button onclick="selectUnit(3)" id="unit-tab-3" class="unit-tab flex-1 min-w-[200px] py-2.5 px-4 rounded-xl font-medium text-sm transition-all duration-200 bg-slate-100 text-slate-600 hover:bg-slate-200">
+                    <i class="fa-solid fa-leaf mr-2"></i>Unit 3: Green Tech
+                </button>
+                <button onclick="selectUnit(4)" id="unit-tab-4" class="unit-tab flex-1 min-w-[200px] py-2.5 px-4 rounded-xl font-medium text-sm transition-all duration-200 bg-slate-100 text-slate-600 hover:bg-slate-200">
+                    <i class="fa-solid fa-hashtag mr-2"></i>Unit 4: Social Media Algorithm
+                </button>
+            </div>
+
+            <!-- Reading Passages Container -->
+            <div id="unit-content-area" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+                <!-- Dynamic Content Loaded via JS -->
+            </div>
+        </section>
+
+        <section id="section-strategies" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+                <div class="border-b border-slate-100 pb-4 mb-6">
+                    <h2 class="text-2xl font-bold text-slate-900 flex items-center">
+                        <i class="fa-solid fa-compass text-indigo-600 mr-3"></i>สรุป 4 กลยุทธ์การอ่านเชิงรุก (Active Reading Strategies)
+                    </h2>
+                    <p class="text-slate-600 text-sm mt-1">เครื่องมือทางความคิดสำหรับนักเรียนชั้นมัธยมศึกษาปีที่ 4 ในการวิเคราะห์บทความภาษาอังกฤษอย่างมีวิจารณญาณ</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Strategy 1 -->
+                    <div class="p-5 rounded-2xl bg-indigo-50/60 border border-indigo-100">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-sm">1</span>
+                            <h3 class="font-bold text-indigo-950 text-base">ใจความสำคัญและโครงสร้าง (Main Idea & Structural Components)</h3>
+                        </div>
+                        <ul class="space-y-2 text-sm text-slate-700 leading-relaxed pl-2">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-angle-right text-indigo-600 mt-1 mr-2 flex-shrink-0"></i>
+                                <span><strong>Hook (ประโยคเปิดดึงดูด):</strong> ประโยคแรกของเรื่องที่เขียนอย่างตื่นเต้น กระตุ้นให้อยากอ่านต่อทันที</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-angle-right text-indigo-600 mt-1 mr-2 flex-shrink-0"></i>
+                                <span><strong>Thesis Statement (ประเด็นระบุทิศทาง):</strong> ประโยคสรุปจุดประสงค์และมุมมองหลักของผู้แต่ง มักพบท้ายย่อหน้าแรก คอยกำหนดขอบข่ายทั้งหมด</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Strategy 2 -->
+                    <div class="p-5 rounded-2xl bg-emerald-50/60 border border-emerald-100">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">2</span>
+                            <h3 class="font-bold text-emerald-950 text-base">การแยกข้อเท็จจริงและข้อคิดเห็น (Fact vs. Opinion & Evidence)</h3>
+                        </div>
+                        <ul class="space-y-2 text-sm text-slate-700 leading-relaxed pl-2">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-angle-right text-emerald-600 mt-1 mr-2 flex-shrink-0"></i>
+                                <span><strong>Fact (ข้อเท็จจริง):</strong> ข้อมูลที่พิสูจน์ได้ด้วยหลักฐานประจักษ์ มาพร้อมตัวเลข สถิติ ผลวิจัย หรือรายงานวิชาการ</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-angle-right text-emerald-600 mt-1 mr-2 flex-shrink-0"></i>
+                                <span><strong>Opinion (ข้อคิดเห็น):</strong> ความเชื่อ ทัศนคติ อารมณ์ หรือการตัดสินคุณค่า มักมีคำระบุ เช่น <em>should, best, believe, right, think, argue</em></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Strategy 3 -->
+                    <div class="p-5 rounded-2xl bg-amber-50/60 border border-amber-100">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-amber-600 text-white flex items-center justify-center font-bold text-sm">3</span>
+                            <h3 class="font-bold text-amber-950 text-base">โครงสร้างความสัมพันธ์เชิงเหตุผล (Cause and Effect Relationships)</h3>
+                        </div>
+                        <ul class="space-y-2 text-sm text-slate-700 leading-relaxed pl-2">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-angle-right text-amber-600 mt-1 mr-2 flex-shrink-0"></i>
+                                <span><strong>Cause (สาเหตุ):</strong> ตัวแปรต้นหรือต้นเหตุ มักพบบ่อยหลังคำเชื่อมจำพวก <em>Because, Since, Due to, Caused by</em></span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-angle-right text-amber-600 mt-1 mr-2 flex-shrink-0"></i>
+                                <span><strong>Effect (ผลลัพธ์):</strong> สภาพการณ์ที่เป็นผลพวง มักพบบ่อยหลังคำเชื่อมประเภท <em>Consequently, Therefore, As a result, Lead to</em></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Strategy 4 -->
+                    <div class="p-5 rounded-2xl bg-rose-50/60 border border-rose-100">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-rose-600 text-white flex items-center justify-center font-bold text-sm">4</span>
+                            <h3 class="font-bold text-rose-950 text-base">วัตถุประสงค์ เจตนา และอคติ (Author's Purpose, Tone & Bias)</h3>
+                        </div>
+                        <ul class="space-y-2 text-sm text-slate-700 leading-relaxed pl-2">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-angle-right text-rose-600 mt-1 mr-2 flex-shrink-0"></i>
+                                <span><strong>Author's Purpose (เจตนารมณ์ผู้แต่ง):</strong> เป้าหมายในการสื่อสาร เช่น แจ้งข่าวสารเพื่อสร้างความตระหนักรู้ หรือเตือนภัยให้รู้เท่าทัน</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-angle-right text-rose-600 mt-1 mr-2 flex-shrink-0"></i>
+                                <span><strong>Author's Bias (อคติหรือความเอนเอียง):</strong> การเลือกใช้กลุ่มคำศัพท์เชิงอารมณ์ ทัศนคติขั้วลบเด่นชัด เช่น <em>corporate greed, modern slavery, dangerous psychological trap</em></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-quiz" class="tab-content hidden space-y-6">
+
+            <!-- Step 1: Student Information Form -->
+            <div id="quiz-registration-card" class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 max-w-2xl mx-auto">
+                <div class="text-center mb-6">
+                    <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl">
+                        <i class="fa-solid fa-user-pen"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900">ลงทะเบียนเข้าทำแบบทดสอบ</h2>
+                    <p class="text-slate-500 text-sm mt-1">รายวิชาการอ่านเชิงวิจารณ์ (อ30222) ม.4 | จำนวน 30 ข้อ 30 คะแนน</p>
+                    <div class="inline-flex items-center gap-2 mt-2 px-3 py-1 bg-amber-50 text-amber-800 text-xs font-medium rounded-full border border-amber-200">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600"></i>
+                        <span>หมายเหตุ: นักเรียนทำข้อสอบได้เพียงครั้งเดียว เมื่อส่งแล้วจะไม่สามารถแก้ไขได้</span>
+                    </div>
+                </div>
+
+                <form id="student-reg-form" onsubmit="handleStartQuiz(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">ชื่อ - นามสกุล <span class="text-rose-500">*</span></label>
+                        <input type="text" id="reg-name" required placeholder="ตัวอย่าง: นายสมชาย ใจดี" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition text-sm">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">ห้องเรียน <span class="text-rose-500">*</span></label>
+                            <select id="reg-class" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition text-sm">
+                                <option value="">-- เลือกห้องเรียน --</option>
+                                <option value="ม.4/1">มัธยมศึกษาปีที่ 4/1</option>
+                                <option value="ม.4/2">มัธยมศึกษาปีที่ 4/2</option>
+                                <option value="ม.4/3">มัธยมศึกษาปีที่ 4/3</option>
+                                <option value="ม.4/4">มัธยมศึกษาปีที่ 4/4</option>
+                                <option value="ม.4/5">มัธยมศึกษาปีที่ 4/5</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">เลขที่ <span class="text-rose-500">*</span></label>
+                            <input type="number" id="reg-no" min="1" max="50" required placeholder="เช่น 15" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">ประเภทแบบทดสอบ <span class="text-rose-500">*</span></label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="border border-slate-200 p-3 rounded-xl flex items-center space-x-3 cursor-pointer hover:bg-slate-50 transition">
+                                <input type="radio" name="reg-type" value="Pre-Test (ก่อนเรียน)" checked class="w-4 h-4 text-indigo-600 focus:ring-indigo-500">
+                                <div>
+                                    <div class="font-medium text-sm text-slate-800">Pre-Test</div>
+                                    <div class="text-xs text-slate-500">แบบทดสอบก่อนเรียน</div>
+                                </div>
+                            </label>
+                            <label class="border border-slate-200 p-3 rounded-xl flex items-center space-x-3 cursor-pointer hover:bg-slate-50 transition">
+                                <input type="radio" name="reg-type" value="Post-Test (หลังเรียน)" class="w-4 h-4 text-indigo-600 focus:ring-indigo-500">
+                                <div>
+                                    <div class="font-medium text-sm text-slate-800">Post-Test</div>
+                                    <div class="text-xs text-slate-500">แบบทดสอบหลังเรียน</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full py-3 px-6 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-base shadow-md transition-all duration-200 mt-4 flex items-center justify-center">
+                        <i class="fa-solid fa-play mr-2"></i>เริ่มทำแบบทดสอบ (30 ข้อ)
+                    </button>
+                </form>
+            </div>
+
+            <!-- Step 2: Quiz Active Screen -->
+            <div id="quiz-active-card" class="hidden space-y-6">
+                <!-- Info Bar -->
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-indigo-50 p-3 rounded-xl border border-indigo-100">
+                            <i class="fa-solid fa-id-badge text-indigo-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <div id="active-student-display" class="font-bold text-slate-900 text-base">---</div>
+                            <div class="flex items-center space-x-2 text-xs text-slate-500 mt-0.5">
+                                <span id="active-type-badge" class="px-2 py-0.5 rounded-md bg-indigo-100 text-indigo-700 font-medium">---</span>
+                                <span>| 30 ข้อ 30 คะแนน</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-3">
+                        <div class="text-right">
+                            <div class="text-xs text-slate-500">ตอบแล้ว</div>
+                            <div id="answered-counter" class="font-bold text-indigo-600 text-lg">0 / 30</div>
+                        </div>
+                        <button onclick="confirmQuizSubmit()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-md transition flex items-center">
+                            <i class="fa-solid fa-paper-plane mr-2"></i>ส่งข้อสอบ
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Questions Navigation Palette -->
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">แถบสถานะข้อสอบ (คลิกเพื่อไปยังข้อนั้น):</div>
+                    <div id="questions-grid" class="flex flex-wrap gap-2">
+                        <!-- Dynamic grid buttons -->
+                    </div>
+                </div>
+
+                <!-- Active Question Box -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+                    <div id="question-card-container">
+                        <!-- Dynamic Single Question View -->
+                    </div>
+
+                    <!-- Navigation controls -->
+                    <div class="flex items-center justify-between border-t border-slate-100 pt-6 mt-6">
+                        <button id="btn-prev-q" onclick="navigateQuestion(-1)" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 text-sm font-medium transition flex items-center">
+                            <i class="fa-solid fa-arrow-left mr-2"></i>ข้อก่อนหน้า
+                        </button>
+                        <span id="current-q-indicator" class="text-xs font-semibold text-slate-500">ข้อ 1 จาก 30</span>
+                        <button id="btn-next-q" onclick="navigateQuestion(1)" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium transition flex items-center">
+                            ข้อถัดไป<i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Quiz Score Summary Certificate (Screenshot Area) -->
+            <div id="quiz-result-card" class="hidden space-y-6">
+                <div class="bg-amber-50 border border-amber-200 p-4 rounded-2xl flex items-center justify-between text-amber-900 text-sm">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-camera text-2xl text-amber-600"></i>
+                        <div>
+                            <div class="font-bold">บันทึกผลการเรียนเรียบร้อยแล้ว!</div>
+                            <div>กรุณา <strong>แคปเจอร์หน้าจอส่วนนี้ (การ์ดสรุปคะแนน)</strong> เพื่อส่งครูผู้สอน</div>
+                        </div>
+                    </div>
+                    <button onclick="window.print()" class="px-3.5 py-1.5 rounded-lg bg-amber-200 hover:bg-amber-300 text-amber-950 font-medium text-xs transition">
+                        <i class="fa-solid fa-print mr-1"></i>พิมพ์ / พิมพ์เป็น PDF
+                    </button>
+                </div>
+
+                <!-- Printable/Capturable Score Certificate -->
+                <div id="capture-score-certificate" class="bg-white rounded-3xl shadow-xl border border-slate-200 p-6 sm:p-10 max-w-3xl mx-auto relative overflow-hidden">
+                    <div class="absolute -right-12 -top-12 w-40 h-40 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                    <div class="absolute -left-12 -bottom-12 w-40 h-40 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+                    <!-- Header logo -->
+                    <div class="text-center border-b border-slate-100 pb-6 mb-6">
+                        <div class="inline-flex items-center justify-center p-3 bg-indigo-50 text-indigo-700 rounded-2xl mb-2">
+                            <i class="fa-solid fa-award text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">ใบบันทึกคะแนนการทดสอบการอ่านเชิงวิจารณ์</h3>
+                        <p class="text-xs text-slate-500 mt-1">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ | โรงเรียนเตรียมอุดมศึกษานครราชสีมา</p>
+                    </div>
+
+                    <!-- Student Details -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 mb-6 text-sm">
+                        <div>
+                            <div class="text-xs text-slate-400">ชื่อ-นามสกุล</div>
+                            <div id="res-student-name" class="font-bold text-slate-800">---</div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-400">ห้องเรียน</div>
+                            <div id="res-student-class" class="font-bold text-slate-800">---</div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-400">เลขที่</div>
+                            <div id="res-student-no" class="font-bold text-slate-800">---</div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-400">ประเภทการทดสอบ</div>
+                            <div id="res-test-type" class="font-bold text-indigo-600">---</div>
+                        </div>
+                    </div>
+
+                    <!-- Main Score Highlight -->
+                    <div class="text-center py-6 bg-gradient-to-br from-indigo-900 to-slate-900 text-white rounded-2xl shadow-inner mb-6 relative">
+                        <div class="text-xs text-indigo-200 font-medium tracking-wider uppercase">คะแนนสอบที่ได้ (Total Score)</div>
+                        <div class="text-5xl sm:text-6xl font-black text-amber-400 my-2" id="res-score-number">0 / 30</div>
+                        <div class="text-sm text-indigo-100 font-medium" id="res-score-percent">คิดเป็น 0%</div>
+                        <div id="res-status-badge" class="mt-3 inline-block px-4 py-1 rounded-full text-xs font-bold bg-emerald-500 text-white">
+                            ผ่านเกณฑ์
+                        </div>
+                    </div>
+
+                    <!-- Strategy Breakdown -->
+                    <div class="space-y-3 mb-6">
+                        <h4 class="font-bold text-sm text-slate-800 border-b border-slate-100 pb-2">ผลการประเมินแยกตาม 4 กลยุทธ์การอ่านเชิงรุก:</h4>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 flex justify-between items-center">
+                                <span class="font-medium text-slate-700">1. ใจความสำคัญ & โครงสร้าง</span>
+                                <span id="strat-score-1" class="font-bold text-indigo-600">0/8</span>
+                            </div>
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 flex justify-between items-center">
+                                <span class="font-medium text-slate-700">2. แยกข้อเท็จจริง & ข้อคิดเห็น</span>
+                                <span id="strat-score-2" class="font-bold text-indigo-600">0/8</span>
+                            </div>
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 flex justify-between items-center">
+                                <span class="font-medium text-slate-700">3. ความสัมพันธ์เชิงเหตุผล</span>
+                                <span id="strat-score-3" class="font-bold text-indigo-600">0/7</span>
+                            </div>
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 flex justify-between items-center">
+                                <span class="font-medium text-slate-700">4. เจตนา อารมณ์ และอคติ</span>
+                                <span id="strat-score-4" class="font-bold text-indigo-600">0/7</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer timestamp -->
+                    <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 gap-2">
+                        <div>ผู้จัดทำ: ครูภิญญาพัชญ์ คบด่านกลาง</div>
+                        <div id="res-timestamp">วันที่ทำรายการ: --/--/----</div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button onclick="resetToNewQuiz()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-600 hover:bg-slate-100 text-sm font-medium transition">
+                        <i class="fa-solid fa-rotate-left mr-2"></i>ทำแบบทดสอบอีกครั้ง (เปลี่ยนชื่อ/ประเภท)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- TEACHER AUTH MODAL -->
+    <div id="teacher-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative border border-slate-100 max-h-[90vh] flex flex-col">
+            <button onclick="closeTeacherModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Auth Form View -->
+            <div id="teacher-auth-view" class="py-4">
+                <div class="text-center mb-6">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-3 text-xl">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900">พื้นที่สำหรับครูผู้สอนเท่านั้น</h3>
+                    <p class="text-xs text-slate-500 mt-1">กรุณากรอกรหัสผ่านเพื่อเข้าสู่ระบบเฉลยและคู่มือการสอน</p>
+                </div>
+
+                <div class="max-w-xs mx-auto space-y-4">
+                    <input type="password" id="teacher-pass-input" placeholder="กรอกรหัสผ่านเข้าใช้งาน" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 outline-none text-center font-bold tracking-widest text-lg">
+                    <button onclick="verifyTeacherPasscode()" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm shadow-md transition">
+                        ยืนยันรหัสผ่าน
+                    </button>
+                </div>
+            </div>
+
+            <!-- Key Content View (When Authenticated) -->
+            <div id="teacher-content-view" class="hidden flex-col h-full overflow-hidden">
+                <div class="border-b border-slate-100 pb-3 mb-4 flex justify-between items-center">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900 flex items-center">
+                            <i class="fa-solid fa-key text-amber-500 mr-2"></i>เฉลยข้อสอบอย่างละเอียด (30 ข้อ)
+                        </h3>
+                        <p class="text-xs text-slate-500">สำหรับครูภิญญาพัชญ์ คบด่านกลาง | โรงเรียนเตรียมอุดมศึกษานครราชสีมา</p>
+                    </div>
+                    <span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-full font-semibold">ยืนยันตัวตนแล้ว</span>
+                </div>
+
+                <div class="flex-grow overflow-y-auto glossary-scrollbar pr-2 space-y-3" id="teacher-key-list">
+                    <!-- Dynamic Answer Keys Loaded Here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Reading Passages Data (All 4 Units)
+        const unitsData = {
+            1: {
+                title: "Unit 1: The Rise of Generative AI: How AI is Shaping Daily Life",
+                color: "indigo",
+                icon: "fa-robot",
+                paragraphs: [
+                    "Every single morning, millions of people wake up and immediately ask a machine to plan their day, write their emails, or even create artwork from scratch. Generative Artificial Intelligence (AI) has officially moved from the pages of science fiction directly into our living rooms. While early computers could only follow strict, pre-written rules, today's advanced AI systems can learn from vast amounts of data to generate entirely new, human-like content in seconds. As this powerful technology rapidly integrates into education, healthcare, and creative industries, it is fundamentally transforming how humans work, learn, and solve complex global problems.",
+                    "In classrooms around the world, AI-powered platforms act as personal tutors that adapt to each student's unique learning pace. This customized approach helps struggling learners catch up while allowing advanced students to explore deeper topics. However, some educators worry that over-reliance on AI might decrease students' critical thinking and writing skills. In their view, if a machine does the thinking, the human mind may lose its creative edge.",
+                    "Meanwhile, the medical sector is witnessing an incredible revolution. Generative AI tools can analyze complex genetic data and assist doctors in discovering life-saving drugs in a fraction of the usual time. Consequently, patients receive faster diagnoses and highly personalized treatments, which significantly increases survival rates for rare diseases.",
+                    "Despite these undeniable benefits, critics argue that the rapid rise of Generative AI poses serious risks. They believe that widespread automation will inevitably lead to massive job losses, leaving millions of workers without a livelihood. Furthermore, there are growing concerns regarding deepfakes and misinformation, which can easily be used to deceive the public. Therefore, society must establish strict regulations to ensure AI is developed ethically and safely."
+                ],
+                glossary: [
+                    { word: "Generative (adj.)", def: "พัฒนาขึ้นมาใหม่ได้, ความสร้างสรรค์เกิดขึ้นเอง" },
+                    { word: "Integrates (v.)", def: "ประสานรวมเข้าด้วยกัน, เชื่อมโยงระบบ" },
+                    { word: "Over-reliance (n.)", def: "ความเกื้อหนุนพึ่งพิงมากเกินขนาด" },
+                    { word: "Diagnoses (n.)", def: "การพิจารณาประเมินเพื่อหาข้อสรุปโรค" },
+                    { word: "Ethically (adv.)", def: "อย่างมีจรรยาบรรณคุณธรรม" }
+                ]
+            },
+            2: {
+                title: "Unit 2: The Cost of Fast Fashion",
+                color: "slate",
+                icon: "fa-shirt",
+                paragraphs: [
+                    "Look closely at your closet: that trendy, twenty-dollar jacket might have a much higher cost than you think. Fast fashion refers to the rapid production of cheap, stylish clothes to meet shifting trends. Globally, the fashion industry is now responsible for nearly 10% of global carbon emissions and 20% of global wastewater, making it more polluting than international flights and maritime shipping combined. Statistics show that the average consumer buys 60% more clothing than they did fifteen years ago, but keeps each garment for only half as long. Because this business model relies on cheap labor and synthetic materials, it causes severe environmental damage and unfair working conditions in developing nations.",
+                    "Environmental activists argue that fast fashion is ruining our planet's water supply. Polyester, a popular synthetic fabric found in these clothes, does not biodegrade. Instead, every time these clothes are washed, they release half a million tons of microplastics into the ocean annually, equivalent to 50 billion plastic bottles. Many researchers believe that if our consuming habits do not change, the fashion industry will consume a quarter of the world's carbon budget by 2050.",
+                    "On the other hand, defenders of the industry claim that fast fashion democratizes style. They believe that everyone, regardless of their income, has the right to look trendy and express themselves through clothing. In their view, shopping brings joy and boosts the economy by creating millions of factory jobs worldwide.",
+                    "However, critics emphasize that these factory jobs often involve modern slavery. Human rights reports reveal that garment workers in many Asian factories earn less than three dollars a day while working sixteen hours in dangerous environments. Ultimately, consumers hold the power to stop this cycle. By choosing sustainable brands or buying secondhand clothing, we can demand better practices from the fashion world."
+                ],
+                glossary: [
+                    { word: "Fast fashion (n.)", def: "วงการเสื้อผ้าแฟชั่นที่ผลิตเร็วราคาต่ำเน้นกระแส" },
+                    { word: "Wastewater (n.)", def: "น้ำเสียที่มีสารเคมีเจือปนจากการย้อมผ้า" },
+                    { word: "Biodegrade (v.)", def: "การย่อยสลายเสื่อมสลายตามชีวภาพ" },
+                    { word: "Democratizes (v.)", def: "ทำให้เข้าถึงได้อย่างเท่าเทียมเสมอภาค" },
+                    { word: "Slavery (n.)", def: "การกดขี่แรงงานทารุณเยี่ยงระบบทาส" }
+                ]
+            },
+            3: {
+                title: "Unit 3: Green Tech Innovations: The Energy Balance",
+                color: "emerald",
+                icon: "fa-leaf",
+                paragraphs: [
+                    "As global temperatures hit record highs every single year, humanity is racing against time to transition away from fossil fuels. Fossil fuel combustion releases greenhouse gases, which trap heat in the atmosphere and trigger catastrophic weather events worldwide. To fight this crisis, scientists have developed \"Green Tech\" innovations, focusing heavily on Electric Vehicles (EVs) and renewable energy. Because these technologies generate minimal emissions during operation, their widespread adoption will drastically reduce urban air pollution and slow down global warming.",
+                    "The sudden boom of Electric Vehicles is already changing global transport. Traditional gasoline cars burn petrol, which creates carbon monoxide and worsens city smog. Conversely, EVs run on lithium-ion batteries; therefore, they produce zero tailpipe emissions. Consequently, cities that incentivize EV usage experience a massive 30% drop in harmful air particles within just a few years.",
+                    "However, the transition to Green Tech is not without obstacles. The mass production of EV batteries requires intensive mining for lithium and cobalt. This mining process often causes severe soil erosion and water contamination in local communities. As a result, critics argue that while EVs protect city air, they accidentally harm rural ecosystems where the materials are gathered.",
+                    "To achieve true sustainability, renewable energy must power the EV charging grid. If a clean EV is charged using electricity made from burning coal, the environmental benefit is lost. Therefore, governments are heavily investing in solar and wind farms. When nations successfully connect green vehicles with green energy sources, they create a perfect circle of zero-emission living."
+                ],
+                glossary: [
+                    { word: "Combustion (n.)", def: "การสันดาป, การทำปฏิกิริยาเผาไหม้สมบูรณ์" },
+                    { word: "Emissions (n.)", def: "การปล่อยไอเสีย, การแพร่สิ่งเจือปน" },
+                    { word: "Erosion (n.)", def: "การกัดเซาะพังทลายสลายของหน้าดิน" },
+                    { word: "Contamination (n.)", def: "การสะสมแปดเปื้อนสารพิษในแหล่งน้ำ" },
+                    { word: "Sustainability (n.)", def: "ความเสถียรความยั่งยืนสมดุลธรรมชาติ" }
+                ]
+            },
+            4: {
+                title: "Unit 4: The Social Media Algorithm: Mind Game",
+                color: "amber",
+                icon: "fa-hashtag",
+                paragraphs: [
+                    "Why does your smartphone seem to know exactly what you are thinking before you even finish typing? The answer lies within social media algorithms—complex formulas designed to track your online behavior, clicks, and watch time. The primary goal of these algorithms is not to connect people, but to maximize screen time and capture human attention for advertising profit. By analyzing user data, the system feeds individuals a continuous stream of content that matches their pre-existing beliefs. As these digital systems silently manipulate our daily habits, they create polarized society bubbles and threaten our psychological well-being.",
+                    "Proponents of algorithmic curation claim that these systems provide an excellent, personalized user experience. They believe algorithms save users time by filtering out irrelevant internet noise and instantly delivering high-quality entertainment. From their perspective, the AI is simply acting as a helpful assistant that makes the internet more enjoyable and organized for everyone.",
+                    "However, tech critics argue that this \"helpful assistant\" is actually a dangerous psychological trap. Algorithms deliberately promote controversial and emotional posts because outrage drives more engagement than calm discussion. Consequently, users are constantly exposed to extreme views, which gradually distorts their reality and breeds hatred toward opposing groups. This artificial environment makes objective thinking almost impossible for young minds.",
+                    "Ultimately, the author believes that social media corporations are prioritising corporate greed over public safety. While platforms promise global connection, their code is engineered for addiction. To protect our minds, users must practice digital literacy, intentionally seek out diverse viewpoints, and occasionally disconnect from the matrix."
+                ],
+                glossary: [
+                    { word: "Algorithms (n.)", def: "ระบบสมการสูตรประมวลผลข้อมูลดิจิทัล" },
+                    { word: "Manipulate (v.)", def: "ครอบงำบงการ, แทรกแซงอย่างเป็นความลับ" },
+                    { word: "Polarized (adj.)", def: "สภาพแตกกร้าวแบ่งขั้วอย่างชัดเจนเป็นสองฝั่ง" },
+                    { word: "Outrage (n.)", def: "ความโกรธเกรี้ยวกระตุ้นอารมณ์เดือดดาล" },
+                    { word: "Corporate greed (n.)", def: "ความโลภมุ่งตักตวงแต่ผลประโยชน์ของกลุ่มธุรกิจ" }
+                ]
+            }
+        };
+
+        // 30 Complete Multiple Choice Questions (30 Points)
+        const quizQuestions = [
+            // Unit 1 Questions (1-7)
+            {
+                id: 1, unit: 1, strategyId: 1,
+                question: "In Unit 1 (Generative AI), what structural role does the opening sentence 'Every single morning, millions of people wake up and immediately ask a machine...' play?",
+                options: [
+                    "A) It acts as a Hook to grab the reader's attention.",
+                    "B) It serves as a Thesis Statement outlining main arguments.",
+                    "C) It provides statistical Evidence proving AI harms jobs.",
+                    "D) It states a concluding summary sentence."
+                ],
+                answer: 0,
+                explain: "ประโยคแรกของเรื่องทำหน้าที่เป็น 'Hook' เพื่อกระตุ้นความสนใจให้ผู้อ่านจินตนาการถึงชีวิตประจำวันที่ผูกติดกับเทคโนโลยี AI"
+            },
+            {
+                id: 2, unit: 1, strategyId: 1,
+                question: "Which sentence in Paragraph 1 of Unit 1 serves as the Thesis Statement of the article?",
+                options: [
+                    "A) 'Every single morning, millions of people wake up...'",
+                    "B) 'Generative Artificial Intelligence has officially moved from science fiction...'",
+                    "C) 'As this powerful technology rapidly integrates into education, healthcare, and creative industries, it is fundamentally transforming how humans work, learn, and solve complex global problems.'",
+                    "D) 'While early computers could only follow strict rules...'"
+                ],
+                answer: 2,
+                explain: "ประโยคสุดท้ายของย่อหน้าแรกทำหน้าที่เป็น Thesis Statement เพราะระบุประเด็นและทิศทางหลักของบทความทั้งหมด"
+            },
+            {
+                id: 3, unit: 1, strategyId: 2,
+                question: "Which of the following statements from Unit 1 is a FACT?",
+                options: [
+                    "A) Generative AI can analyze complex genetic data to assist doctors in discovering drugs.",
+                    "B) Generative AI is the most exciting invention in human history.",
+                    "C) All students should rely entirely on AI for writing tasks.",
+                    "D) The human mind will definitely lose its creative edge within five years."
+                ],
+                answer: 0,
+                explain: "ข้อมูลเกี่ยวกับ AI ในการวิเคราะห์ข้อมูลพันธุกรรมเพื่อค้นหายาเป็นข้อเท็จจริง (Fact) ที่สามารถพิสูจน์และตรวจสอบได้เชิงวิทยาศาสตร์"
+            },
+            {
+                id: 4, unit: 1, strategyId: 3,
+                question: "According to Paragraph 3 of Unit 1, what is the direct EFFECT of AI analyzing complex genetic data?",
+                options: [
+                    "A) Students lose their critical thinking skills.",
+                    "B) Patients receive faster diagnoses and highly personalized treatments.",
+                    "C) Millions of workers lose their jobs immediately.",
+                    "D) Deepfakes are created automatically."
+                ],
+                answer: 1,
+                explain: "ย่อหน้าที่ 3 ระบุว่าผลลัพธ์โดยตรงของการที่ AI วิเคราะห์ข้อมูลพันธุกรรมคือผู้ป่วยได้รับการวินิจฉัยโรคเร็วขึ้นและรับการรักษาเฉพาะบุคคล"
+            },
+            {
+                id: 5, unit: 1, strategyId: 3,
+                question: "In Unit 1, Paragraph 3, what signal word is used to indicate a result or effect?",
+                options: [
+                    "A) However",
+                    "B) Because",
+                    "C) Consequently",
+                    "D) Meanwhile"
+                ],
+                answer: 2,
+                explain: "คำว่า 'Consequently' เป็นคำเชื่อมชี้แสดงผลลัพธ์ (Signal word for Effect)"
+            },
+            {
+                id: 6, unit: 1, strategyId: 4,
+                question: "What is the primary Author's Purpose in the final paragraph of Unit 1?",
+                options: [
+                    "A) To promote purchasing generative AI tools.",
+                    "B) To warn about potential risks and advocate for ethical regulation.",
+                    "C) To convince readers that AI is completely useless.",
+                    "D) To entertain readers with sci-fi stories."
+                ],
+                answer: 1,
+                explain: "ย่อหน้าสุดท้ายมีเป้าหมายเพื่อเตือนภัยเกี่ยวกับความเสี่ยง (งานหาย/ข่าวปลอม) และเรียกร้องให้มีการกำกับดูแลทางจริยธรรมอย่างเคร่งครัด"
+            },
+            {
+                id: 7, unit: 1, strategyId: 1,
+                question: "Based on the vocabulary glossary in Unit 1, what does the word 'Integrates' mean?",
+                options: [
+                    "A) To divide into smaller parts.",
+                    "B) To combine or unite into a unified whole.",
+                    "C) To reject modern technology.",
+                    "D) To slow down a mechanical process."
+                ],
+                answer: 1,
+                explain: "ตามพจนานุกรมท้ายเรื่อง Integrates หมายถึง การประสานรวมเข้าด้วยกัน หรือเชื่อมโยงระบบเข้าด้วยกัน"
+            },
+
+            // Unit 2 Questions (8-15)
+            {
+                id: 8, unit: 2, strategyId: 1,
+                question: "In Unit 2 (Fast Fashion), how does the author create an engaging Hook in the first paragraph?",
+                options: [
+                    "A) By asking the reader to inspect their own closet and a trendy $20 jacket.",
+                    "B) By presenting an academic chart of chemistry rules.",
+                    "C) By quoting an ancient philosopher.",
+                    "D) By listing 100 fashion brands."
+                ],
+                answer: 0,
+                explain: "ผู้เขียนใช้ Hook โดยดึงดูดให้อ่านต่อด้วยการให้ผู้อ่านลองสังเกตเสื้อแจ็กเก็ตราคา 20 ดอลลาร์ในตู้เสื้อผ้าของตนเอง"
+            },
+            {
+                id: 9, unit: 2, strategyId: 2,
+                question: "Which statistical EVIDENCE is provided in Paragraph 1 of Unit 2 to show environmental impact?",
+                options: [
+                    "A) Fast fashion produces 90% of global air pollution.",
+                    "B) Fast fashion accounts for nearly 10% of global carbon emissions and 20% of wastewater.",
+                    "C) Fast fashion employs 100% of workers in Asia.",
+                    "D) Fast fashion causes zero carbon emissions."
+                ],
+                answer: 1,
+                explain: "หลักฐานสถิติข้อเท็จจริงในย่อหน้าแรกระบุว่า อุตสาหกรรมแฟชั่นผลิตปล่อยคาร์บอนเกือบ 10% และสร้างน้ำเสีย 20% ของโลก"
+            },
+            {
+                id: 10, unit: 2, strategyId: 2,
+                question: "Which statement from Unit 2 represents an OPINION of industry defenders?",
+                options: [
+                    "A) Garment workers earn less than three dollars a day in some factories.",
+                    "B) Polyester releases half a million tons of microplastics annually.",
+                    "C) Shopping brings joy and boosts the economy.",
+                    "D) Fast fashion contributes to carbon emissions."
+                ],
+                answer: 2,
+                explain: "ประโยคที่ว่า 'การช้อปปิ้งสร้างความสุขและช่วยกระตุ้นเศรษฐกิจ' เป็นข้อคิดเห็น/ทัศนคติ (Opinion) ของกลุ่มผู้ปกป้องอุตสาหกรรม"
+            },
+            {
+                id: 11, unit: 2, strategyId: 3,
+                question: "In the sentence 'Because this business model relies on cheap labor..., it causes severe damage', what does 'Because' introduce?",
+                options: [
+                    "A) The Effect",
+                    "B) The Cause",
+                    "C) The Thesis Statement",
+                    "D) The Solution"
+                ],
+                answer: 1,
+                explain: "คำเชื่อม 'Because' ทำหน้าที่ระบุ/เกริ่นนำ 'สาเหตุ' (The Cause)"
+            },
+            {
+                id: 12, unit: 2, strategyId: 3,
+                question: "According to Paragraph 2 of Unit 2, what is the CAUSE of microplastics releasing into the ocean?",
+                options: [
+                    "A) Burning polyester fabric in dumpsters.",
+                    "B) Washing clothes made from synthetic polyester fabric.",
+                    "C) Transporting clothes on international flights.",
+                    "D) Recycling cotton shirts in factories."
+                ],
+                answer: 1,
+                explain: "เนื้อหาระบุว่าการซักเสื้อผ้าที่ทำจากเส้นใยสังเคราะห์โพลีเอสเตอร์ เป็นต้นเหตุที่ปล่อยไมโครพลาสติกลงสู่มหาสมุทร"
+            },
+            {
+                id: 13, unit: 2, strategyId: 4,
+                question: "What is the Author's Bias or stance toward Fast Fashion in Unit 2?",
+                options: [
+                    "A) Highly supportive, encouraging readers to buy more clothes.",
+                    "B) Critical of its environmental and human rights impacts.",
+                    "C) Completely neutral without any personal evaluation.",
+                    "D) Indifferent and unconcerned about fashion."
+                ],
+                answer: 1,
+                explain: "ผู้เขียนมีทัศนคติเอนเอียงเชิงวิพากษ์วิจารณ์ (Critical) ต่อผลกระทบด้านสิ่งแวดล้อมและการละเมิดสิทธิแรงงานของ Fast Fashion"
+            },
+            {
+                id: 14, unit: 2, strategyId: 4,
+                question: "What solution does the author suggest at the end of Unit 2 to stop the fast fashion cycle?",
+                options: [
+                    "A) Buying cheap clothes every week.",
+                    "B) Throwing away old clothes into rivers.",
+                    "C) Choosing sustainable brands or buying secondhand clothing.",
+                    "D) Closing down all retail stores completely."
+                ],
+                answer: 2,
+                explain: "ผู้เขียนเสนอทางออกในประโยคท้ายเรื่องให้เลือกอุดหนุนแบรนด์ที่ยั่งยืนหรือเลือกซื้อเสื้อผ้ามือสอง"
+            },
+            {
+                id: 15, unit: 2, strategyId: 1,
+                question: "In Unit 2's Glossary, what is the meaning of the word 'Biodegrade'?",
+                options: [
+                    "A) To break down naturally through biological processes.",
+                    "B) To burn rapidly with chemical fire.",
+                    "C) To expand in volume when wet.",
+                    "D) To absorb water without dissolving."
+                ],
+                answer: 0,
+                explain: "Biodegrade หมายถึง การย่อยสลายหรือเสื่อมสลายได้ตามธรรมชาติด้วยกระบวนการทางชีวภาพ"
+            },
+
+            // Unit 3 Questions (16-22)
+            {
+                id: 16, unit: 3, strategyId: 1,
+                question: "What main crisis is described in the opening paragraph of Unit 3 (Green Tech Innovations)?",
+                options: [
+                    "A) Rising global temperatures and greenhouse gas emissions from fossil fuel combustion.",
+                    "B) A sudden shortage of electric vehicles worldwide.",
+                    "C) Overpopulation in rural farming villages.",
+                    "D) Lack of international airport infrastructure."
+                ],
+                answer: 0,
+                explain: "วิกฤตหลักคืออุณหภูมิโลกสูงขึ้นและก๊าซเรือนกระจกจากการเผาไหม้เชื้อเพลิงฟอสซิล"
+            },
+            {
+                id: 17, unit: 3, strategyId: 2,
+                question: "Which of the following is a FACT explicitly stated in Unit 3?",
+                options: [
+                    "A) Cities incentivizing EV usage experience a 30% drop in harmful air particles.",
+                    "B) Electric cars are the most beautiful vehicles ever created.",
+                    "C) Everyone must sell their gasoline cars immediately.",
+                    "D) Solar energy will solve 100% of all world problems tomorrow."
+                ],
+                answer: 0,
+                explain: "การที่เมืองซึ่งสนับสนุน EV มีปริมาณฝุ่นมลพิษลดลง 30% เป็นข้อเท็จจริง (Fact) ที่มีสถิติชัดเจน"
+            },
+            {
+                id: 18, unit: 3, strategyId: 3,
+                question: "In Paragraph 2 of Unit 3, what word signals a contrast between traditional gasoline cars and EVs?",
+                options: [
+                    "A) Therefore",
+                    "B) Consequently",
+                    "C) Conversely",
+                    "D) Because"
+                ],
+                answer: 2,
+                explain: "คำว่า 'Conversely' เป็นคำเชื่อมแสดงความขัดแย้ง/ตรงกันข้าม (Contrast Signal)"
+            },
+            {
+                id: 19, unit: 3, strategyId: 3,
+                question: "What unintended negative EFFECT of EV battery production is highlighted in Paragraph 3 of Unit 3?",
+                options: [
+                    "A) Higher air pollution in large megacities.",
+                    "B) Severe soil erosion and water contamination in rural mining communities.",
+                    "C) Plastic bottles polluting the ocean.",
+                    "D) Decrease in lithium battery efficiency."
+                ],
+                answer: 1,
+                explain: "ย่อหน้าที่ 3 ชี้ให้เห็นผลลัพธ์เชิงลบทางอ้อมคือการทำเหมืองลิเธียมทำให้เกิดการกัดเซาะหน้าดินและการปนเปื้อนสารพิษในแหล่งน้ำชุมชนชนบท"
+            },
+            {
+                id: 20, unit: 3, strategyId: 3,
+                question: "According to Paragraph 4 of Unit 3, what condition is necessary to achieve 'true sustainability'?",
+                options: [
+                    "A) Renewable energy sources must power the EV charging grid.",
+                    "B) Coal-fired power plants must build more electric cars.",
+                    "C) Electric vehicles must run without batteries.",
+                    "D) Governments must ban all electricity usage."
+                ],
+                answer: 0,
+                explain: "การจะบรรลุความยั่งยืนที่แท้จริงได้ ไฟฟ้าที่นำมารีชาร์จ EV ต้องมาจากพลังงานหมุนเวียน ไม่ใช่การเผาถ่านหิน"
+            },
+            {
+                id: 21, unit: 3, strategyId: 4,
+                question: "How would you describe the overall tone of Unit 3 regarding Green Tech Innovations?",
+                options: [
+                    "A) Extremely hostile and anti-technology.",
+                    "B) Balanced and objective, acknowledging both benefits and obstacles.",
+                    "C) Sarcastic and humorous.",
+                    "D) Careless and dismissive."
+                ],
+                answer: 1,
+                explain: "น้ำเสียงของผู้แต่งเป็นกลางและสมดุล (Balanced & Objective) โดยชื่นชมข้อดีของ Green Tech แต่ก็นำเสนออุปสรรคและผลกระทบด้านเหมืองแร่อย่างตรงไปตรงมา"
+            },
+            {
+                id: 22, unit: 3, strategyId: 1,
+                question: "In Unit 3's Glossary, what is the meaning of 'Contamination'?",
+                options: [
+                    "A) The process of purifying clean air.",
+                    "B) The accumulation of poisonous or polluting substances in water/environment.",
+                    "C) The mechanical repair of electric motors.",
+                    "D) The planting of green trees."
+                ],
+                answer: 1,
+                explain: "Contamination หมายถึง การสะสมแปดเปื้อนสารพิษหรือสิ่งปนเปื้อนในแหล่งน้ำและสิ่งแวดล้อม"
+            },
+
+            // Unit 4 Questions (23-30)
+            {
+                id: 23, unit: 4, strategyId: 1,
+                question: "In Unit 4 (Social Media Algorithm), what technique is used in the opening Hook?",
+                options: [
+                    "A) Asking a direct question about smartphone behavior to intrigue the reader.",
+                    "B) Providing a dictionary definition of software code.",
+                    "C) Presenting a mathematical formula.",
+                    "D) Quoting a historical law textbook."
+                ],
+                answer: 0,
+                explain: "ผู้เขียนเปิดเรื่องด้วยคำถามดึงดูดใจ (Rhetorical Hook) ว่าเหตุใดสมาร์ตโฟนจึงดูเหมือนรู้ล่วงหน้าว่าเราคิดอะไรอยู่"
+            },
+            {
+                id: 24, unit: 4, strategyId: 1,
+                question: "According to Paragraph 1 of Unit 4, what is the primary goal of social media algorithms?",
+                options: [
+                    "A) To connect people and build strong friendships.",
+                    "B) To maximize screen time and capture attention for advertising profit.",
+                    "C) To educate students on global history.",
+                    "D) To improve battery life on mobile devices."
+                ],
+                answer: 1,
+                explain: "ย่อหน้าที่ 1 ระบุอย่างชัดเจนว่าเป้าหมายหลักของอัลกอริทึมไม่ใช่การเชื่อมโยงผู้คน แต่เพื่อเพิ่มเวลาอยู่บนหน้าจอและดึงดูดความสนใจเพื่อผลกำไรจากโฆษณา"
+            },
+            {
+                id: 25, unit: 4, strategyId: 2,
+                question: "Which of the following statements in Unit 4 expresses an OPINION held by proponents?",
+                options: [
+                    "A) Algorithms act as a helpful assistant that makes the internet more enjoyable.",
+                    "B) Algorithms are complex formulas that track user clicks.",
+                    "C) Outrage posts drive more engagement on social media.",
+                    "D) Social media platforms run on digital software code."
+                ],
+                answer: 0,
+                explain: "มุมมองที่ว่า 'อัลกอริทึมทำหน้าที่เหมือนผู้ช่วยที่มีประโยชน์และทำให้ใช้อินเทอร์เน็ตสนุกขึ้น' เป็นข้อคิดเห็น/มุมมองบวก (Opinion)"
+            },
+            {
+                id: 26, unit: 4, strategyId: 3,
+                question: "In Paragraph 3 of Unit 4, why do algorithms deliberately promote controversial and emotional posts?",
+                options: [
+                    "A) Because emotional posts make people fall asleep faster.",
+                    "B) Because outrage drives more user engagement than calm discussion.",
+                    "C) Because controversial posts contain no advertising.",
+                    "D) Because tech corporations want to promote peace."
+                ],
+                answer: 1,
+                explain: "อัลกอริทึมดันโพสต์ที่ดราม่าและสะเทือนอารมณ์ เพราะความโกรธเกรี้ยว (Outrage) กระตุ้นการมีส่วนร่วมและการใช้งานได้มากกว่าการพูดคุยสงบๆ"
+            },
+            {
+                id: 27, unit: 4, strategyId: 4,
+                question: "In the final paragraph of Unit 4, the phrase 'corporate greed' reveals what about the author?",
+                options: [
+                    "A) Author's Bias and strong negative evaluation toward social media corporations.",
+                    "B) Author's desire to invest in tech stock markets.",
+                    "C) Author's total ignorance about business.",
+                    "D) Author's preference for watching TV."
+                ],
+                answer: 0,
+                explain: "การใช้ถ้อยคำรุนแรงเช่น 'corporate greed' (ความโลภของกลุ่มทุน) แสดงให้เห็นถึง อคติหรือทัศนคติเชิงลบเด่นชัด (Author's Bias) ของผู้เขียนต่อบริษัทโซเชียลมีเดีย"
+            },
+            {
+                id: 28, unit: 4, strategyId: 4,
+                question: "What main action does the author advise readers to take in the final paragraph of Unit 4?",
+                options: [
+                    "A) Delete all smartphones and move to the forest forever.",
+                    "B) Practice digital literacy, seek out diverse viewpoints, and occasionally disconnect.",
+                    "C) Believe every news post on social media feeds unconditionally.",
+                    "D) Share controversial posts to gain more followers."
+                ],
+                answer: 1,
+                explain: "ผู้เขียนเสนอทางออกท้ายเรื่องให้ผู้ใช้ฝึกรู้เท่าทันสื่อดิจิทัล (Digital literacy) เปิดรับมุมมองที่หลากหลาย และพักการเชื่อมต่อเป็นครั้งคราว"
+            },
+            {
+                id: 29, unit: 4, strategyId: 1,
+                question: "In Unit 4's Glossary, what does the word 'Polarized' mean?",
+                options: [
+                    "A) Divided into sharply contrasting or opposing groups/factions.",
+                    "B) Frozen into solid ice cubes.",
+                    "C) Connected in total perfect harmony.",
+                    "D) Multiplied into millions of numbers."
+                ],
+                answer: 0,
+                explain: "Polarized หมายถึง สภาพการแตกกร้าวแบ่งขั้วออกเป็นสองฝั่งอย่างขัดแย้งชัดเจน"
+            },
+            {
+                id: 30, unit: 1, strategyId: 2,
+                question: "Overall, across all four active reading units, what core skill is essential for a critical reader?",
+                options: [
+                    "A) Memorizing every English word without understanding.",
+                    "B) Reading as fast as possible without stopping to think.",
+                    "C) Evaluating texts using structural components, facts vs. opinions, cause-effect logic, and detecting bias.",
+                    "D) Accepting all online articles as absolute truth."
+                ],
+                answer: 2,
+                explain: "หัวใจสำคัญของการอ่านเชิงวิจารณ์ (Critical Reading) คือการใช้ทักษะเชิงรุกประเมินโครงสร้าง แยกแยะข้อเท็จจริง/ข้อคิดเห็น วิเคราะห์เหตุและผล ตลอดจนเท่าทันอคติของผู้แต่ง"
+            }
+        ];
+
+        // App Global State
+        let currentTab = 'materials';
+        let currentUnit = 1;
+        let studentData = null;
+        let userAnswers = {}; // { qId: optionIndex }
+        let currentQuestionIndex = 0;
+        let teacherAuthenticated = false;
+
+        // Initialize Page
+        window.addEventListener('DOMContentLoaded', () => {
+            renderUnitContent(1);
+        });
+
+        // Tab Navigation Switcher
+        function switchTab(tabId) {
+            currentTab = tabId;
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.nav-tab').forEach(el => {
+                el.classList.remove('bg-white', 'text-brand-700', 'shadow-sm');
+                el.classList.add('text-white', 'hover:bg-white/10');
+            });
+
+            document.getElementById(`section-${tabId}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-white', 'hover:bg-white/10');
+                activeBtn.classList.add('bg-white', 'text-brand-700', 'shadow-sm');
+            }
+        }
+
+        // Unit Selection Switcher
+        function selectUnit(unitId) {
+            currentUnit = unitId;
+            document.querySelectorAll('.unit-tab').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-md');
+                btn.classList.add('bg-slate-100', 'text-slate-600', 'hover:bg-slate-200');
+            });
+
+            const activeTab = document.getElementById(`unit-tab-${unitId}`);
+            if (activeTab) {
+                activeTab.classList.remove('bg-slate-100', 'text-slate-600', 'hover:bg-slate-200');
+                activeTab.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
+            }
+
+            renderUnitContent(unitId);
+        }
+
+        // Render Unit Reading Material Area
+        function renderUnitContent(unitId) {
+            const data = unitsData[unitId];
+            const area = document.getElementById('unit-content-area');
+
+            let paragraphsHTML = data.paragraphs.map((p, idx) => `
+                <p class="text-slate-700 text-base leading-relaxed mb-4 pl-4 border-l-4 border-indigo-500/80 hover:border-indigo-600 transition">
+                    <span class="text-xs font-bold text-indigo-500 block mb-0.5">PARAGRAPH ${idx + 1}</span>
+                    ${p}
+                </p>
+            `).join('');
+
+            let glossaryHTML = data.glossary.map(g => `
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 hover:border-indigo-200 transition">
+                    <div class="font-bold text-indigo-900 text-sm">${g.word}</div>
+                    <div class="text-xs text-slate-600 mt-0.5">${g.def}</div>
+                </div>
+            `).join('');
+
+            area.innerHTML = `
+                <div class="border-b border-slate-100 pb-4 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                        <div class="text-xs font-bold text-indigo-600 tracking-wider uppercase">Active Reading Passage</div>
+                        <h2 class="text-xl sm:text-2xl font-bold text-slate-900">${data.title}</h2>
+                    </div>
+                    <span class="inline-flex items-center text-xs font-medium px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-100 self-start sm:self-auto">
+                        <i class="fa-solid ${data.icon} mr-1.5"></i>วิชาการอ่านเชิงวิจารณ์ ม.4
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Text Area (2 Columns on large) -->
+                    <div class="lg:col-span-2 space-y-4">
+                        ${paragraphsHTML}
+                    </div>
+
+                    <!-- Glossary Side Panel (1 Column on large) -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-indigo-50/40 p-5 rounded-2xl border border-indigo-100 sticky top-24">
+                            <div class="flex items-center space-x-2 text-indigo-950 font-bold text-base mb-3 pb-2 border-b border-indigo-100">
+                                <i class="fa-solid fa-book text-indigo-600"></i>
+                                <span>Vocabulary Glossary (คำศัพท์ยากน่ารู้)</span>
+                            </div>
+                            <div class="space-y-2 max-h-[420px] overflow-y-auto glossary-scrollbar pr-1">
+                                ${glossaryHTML}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Start Quiz Registration
+        function handleStartQuiz(event) {
+            event.preventDefault();
+            const name = document.getElementById('reg-name').value.trim();
+            const cls = document.getElementById('reg-class').value;
+            const no = document.getElementById('reg-no').value;
+            const testType = document.querySelector('input[name="reg-type"]:checked').value;
+
+            if (!name || !cls || !no) return;
+
+            studentData = { name, class: cls, no, testType, timestamp: new Date().toLocaleString('th-TH') };
+            userAnswers = {};
+            currentQuestionIndex = 0;
+
+            // Update Active Bar
+            document.getElementById('active-student-display').innerText = `${studentData.name} (${studentData.class} เลขที่ ${studentData.no})`;
+            document.getElementById('active-type-badge').innerText = studentData.testType;
+
+            // Show Active Quiz Card
+            document.getElementById('quiz-registration-card').classList.add('hidden');
+            document.getElementById('quiz-active-card').classList.remove('hidden');
+
+            renderQuizNavigationGrid();
+            renderCurrentQuestion();
+        }
+
+        // Render Questions Grid Buttons
+        function renderQuizNavigationGrid() {
+            const container = document.getElementById('questions-grid');
+            container.innerHTML = quizQuestions.map((q, idx) => {
+                const isAnswered = userAnswers[q.id] !== undefined;
+                const isCurrent = idx === currentQuestionIndex;
+
+                let btnClass = "w-8 h-8 rounded-lg text-xs font-bold transition flex items-center justify-center border ";
+                if (isCurrent) {
+                    btnClass += "bg-indigo-600 text-white border-indigo-600 ring-2 ring-indigo-300";
+                } else if (isAnswered) {
+                    btnClass += "bg-emerald-500 text-white border-emerald-500";
+                } else {
+                    btnClass += "bg-slate-100 text-slate-600 border-slate-200 hover:bg-slate-200";
+                }
+
+                return `<button onclick="jumpToQuestion(${idx})" class="${btnClass}">${idx + 1}</button>`;
+            }).join('');
+
+            // Update Counter
+            const answeredCount = Object.keys(userAnswers).length;
+            document.getElementById('answered-counter').innerText = `${answeredCount} / 30`;
+        }
+
+        // Render Current Question Item
+        function renderCurrentQuestion() {
+            const q = quizQuestions[currentQuestionIndex];
+            const container = document.getElementById('question-card-container');
+            const selectedOpt = userAnswers[q.id];
+
+            let optionsHTML = q.options.map((opt, optIdx) => {
+                const isChecked = selectedOpt === optIdx;
+                return `
+                    <label onclick="selectAnswer(${q.id}, ${optIdx})" class="border ${isChecked ? 'border-indigo-600 bg-indigo-50/70 ring-1 ring-indigo-500' : 'border-slate-200 hover:bg-slate-50'} p-4 rounded-xl flex items-start space-x-3 cursor-pointer transition">
+                        <input type="radio" name="q-${q.id}" ${isChecked ? 'checked' : ''} class="mt-1 text-indigo-600 focus:ring-indigo-500">
+                        <span class="text-sm font-medium text-slate-800 leading-relaxed">${opt}</span>
+                    </label>
+                `;
+            }).join('');
+
+            const stratLabels = {
+                1: "กลยุทธ์ที่ 1: ใจความสำคัญ & โครงสร้าง",
+                2: "กลยุทธ์ที่ 2: แยกข้อเท็จจริง & ข้อคิดเห็น",
+                3: "กลยุทธ์ที่ 3: ความสัมพันธ์เชิงเหตุผล",
+                4: "กลยุทธ์ที่ 4: วัตถุประสงค์ เจตนา และอคติ"
+            };
+
+            container.innerHTML = `
+                <div class="mb-4 flex items-center justify-between">
+                    <span class="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-600">
+                        Unit ${q.unit} | ข้อที่ ${currentQuestionIndex + 1} จาก 30
+                    </span>
+                    <span class="text-xs font-semibold px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100">
+                        ${stratLabels[q.strategyId]}
+                    </span>
+                </div>
+
+                <h3 class="text-base sm:text-lg font-bold text-slate-900 leading-snug mb-6">
+                    ${q.question}
+                </h3>
+
+                <div class="space-y-3">
+                    ${optionsHTML}
+                </div>
+            `;
+
+            // Update Navigation Controls
+            document.getElementById('current-q-indicator').innerText = `ข้อ ${currentQuestionIndex + 1} จาก 30`;
+            document.getElementById('btn-prev-q').disabled = currentQuestionIndex === 0;
+            document.getElementById('btn-prev-q').style.opacity = currentQuestionIndex === 0 ? "0.5" : "1";
+            document.getElementById('btn-next-q').disabled = currentQuestionIndex === quizQuestions.length - 1;
+            document.getElementById('btn-next-q').style.opacity = currentQuestionIndex === quizQuestions.length - 1 ? "0.5" : "1";
+
+            renderQuizNavigationGrid();
+        }
+
+        function selectAnswer(questionId, optIndex) {
+            userAnswers[questionId] = optIndex;
+            renderCurrentQuestion();
+        }
+
+        function jumpToQuestion(index) {
+            currentQuestionIndex = index;
+            renderCurrentQuestion();
+        }
+
+        function navigateQuestion(delta) {
+            const next = currentQuestionIndex + delta;
+            if (next >= 0 && next < quizQuestions.length) {
+                currentQuestionIndex = next;
+                renderCurrentQuestion();
+            }
+        }
+
+        // Confirm Submit Modal
+        function confirmQuizSubmit() {
+            const answeredCount = Object.keys(userAnswers).length;
+            if (answeredCount < 30) {
+                if (!confirm(`นักเรียนตอบไปเพียง ${answeredCount} จาก 30 ข้อ ต้องการยืนยันส่งข้อสอบทันทีหรือไม่?`)) {
+                    return;
+                }
+            } else {
+                if (!confirm("คุณต้องการยืนยันการส่งข้อสอบใช่หรือไม่? (เมื่อส่งแล้วจะไม่สามารถแก้ไขได้)")) {
+                    return;
+                }
+            }
+
+            processQuizResults();
+        }
+
+        // Process Score & Display Certificate
+        function processQuizResults() {
+            let totalScore = 0;
+            let stratScores = { 1: { score: 0, total: 0 }, 2: { score: 0, total: 0 }, 3: { score: 0, total: 0 }, 4: { score: 0, total: 0 } };
+
+            quizQuestions.forEach(q => {
+                stratScores[q.strategyId].total++;
+                if (userAnswers[q.id] === q.answer) {
+                    totalScore++;
+                    stratScores[q.strategyId].score++;
+                }
+            });
+
+            const percent = Math.round((totalScore / 30) * 100);
+
+            // Populate Certificate
+            document.getElementById('res-student-name').innerText = studentData.name;
+            document.getElementById('res-student-class').innerText = studentData.class;
+            document.getElementById('res-student-no').innerText = studentData.no;
+            document.getElementById('res-test-type').innerText = studentData.testType;
+            document.getElementById('res-score-number').innerText = `${totalScore} / 30`;
+            document.getElementById('res-score-percent').innerText = `คิดเป็น ${percent}%`;
+            document.getElementById('res-timestamp').innerText = `วันที่ทำรายการ: ${studentData.timestamp}`;
+
+            // Strategy breakdown text
+            document.getElementById('strat-score-1').innerText = `${stratScores[1].score} / ${stratScores[1].total}`;
+            document.getElementById('strat-score-2').innerText = `${stratScores[2].score} / ${stratScores[2].total}`;
+            document.getElementById('strat-score-3').innerText = `${stratScores[3].score} / ${stratScores[3].total}`;
+            document.getElementById('strat-score-4').innerText = `${stratScores[4].score} / ${stratScores[4].total}`;
+
+            // Status Badge
+            const badge = document.getElementById('res-status-badge');
+            if (percent >= 80) {
+                badge.innerText = "ระดับผลการประเมิน: ดีเยี่ยม (Very Good)";
+                badge.className = "mt-3 inline-block px-4 py-1 rounded-full text-xs font-bold bg-emerald-500 text-white";
+            } else if (percent >= 60) {
+                badge.innerText = "ระดับผลการประเมิน: ผ่านเกณฑ์ (Passed)";
+                badge.className = "mt-3 inline-block px-4 py-1 rounded-full text-xs font-bold bg-blue-500 text-white";
+            } else {
+                badge.innerText = "ระดับผลการประเมิน: ควรปรับปรุง (Needs Improvement)";
+                badge.className = "mt-3 inline-block px-4 py-1 rounded-full text-xs font-bold bg-amber-500 text-white";
+            }
+
+            // Switch to Result View
+            document.getElementById('quiz-active-card').classList.add('hidden');
+            document.getElementById('quiz-result-card').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function resetToNewQuiz() {
+            if (confirm("ต้องการเริ่มลงทะเบียนเพื่อทำแบบทดสอบใหม่ใช่หรือไม่?")) {
+                studentData = null;
+                userAnswers = {};
+                document.getElementById('quiz-result-card').classList.add('hidden');
+                document.getElementById('quiz-registration-card').classList.remove('hidden');
+            }
+        }
+
+        function openTeacherAuthModal() {
+            document.getElementById('teacher-modal').classList.remove('hidden');
+            if (teacherAuthenticated) {
+                showTeacherContentView();
+            } else {
+                document.getElementById('teacher-auth-view').classList.remove('hidden');
+                document.getElementById('teacher-content-view').classList.add('hidden');
+            }
+        }
+
+        function closeTeacherModal() {
+            document.getElementById('teacher-modal').classList.add('hidden');
+        }
+
+        function verifyTeacherPasscode() {
+            const input = document.getElementById('teacher-pass-input').value.trim();
+            // Secure Passcode Validation
+            if (input === "198020") {
+                teacherAuthenticated = true;
+                showTeacherContentView();
+            } else {
+                alert("รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
+            }
+        }
+
+        function showTeacherContentView() {
+            document.getElementById('teacher-auth-view').classList.add('hidden');
+            document.getElementById('teacher-content-view').classList.remove('hidden');
+            document.getElementById('teacher-content-view').classList.add('flex');
+
+            renderTeacherKeyList();
+        }
+
+        function renderTeacherKeyList() {
+            const container = document.getElementById('teacher-key-list');
+            container.innerHTML = quizQuestions.map((q, idx) => {
+                const correctOptText = q.options[q.answer];
+                return `
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-slate-800 text-sm">ข้อที่ ${idx + 1} (Unit ${q.unit})</span>
+                            <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">เฉลย: ${correctOptText.charAt(0)}</span>
+                        </div>
+                        <p class="text-slate-700 font-medium">${q.question}</p>
+                        <div class="text-emerald-700 font-semibold bg-emerald-50 p-2 rounded-lg border border-emerald-100">
+                            คำตอบที่ถูกต้อง: ${correctOptText}
+                        </div>
+                        <div class="text-slate-500 italic bg-white p-2 rounded border border-slate-100">
+                            <strong class="not-italic text-indigo-600">คำอธิบาย:</strong> ${q.explain}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+    </script>
+</body>
+</html>
